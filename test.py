@@ -20,7 +20,7 @@ def predict(weights, data):
     return predictions
 
 def main():
-    print("Testing model...")
+    print("Testing...")
     
     # Load model
     weights = load_model()
