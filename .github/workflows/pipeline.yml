@@ -59,7 +59,7 @@ jobs:
   
   deploy:
     runs-on: self-hosted
-    needs: Save Model
+    needs: save-model
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
