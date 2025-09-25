@@ -15,11 +15,15 @@ jobs:
       uses: actions/checkout@v4
     
     - name: Build Docker image
-      run: docker build -f docker/Dockerfile.model -t mlops-model .
+      run: docker build -t mlops-model -f docker/Dockerfile.model .
 
-    - name: Train model
-      run: docker run --rm -v "${{ github.workspace }}/model:/app/model" mlops-model
-      
+    - name: Run training in Docker
+      run: |
+        docker run --rm \
+          -v "${{ github.workspace }}/model:/app/model" \
+          -v "${{ github.workspace }}/iris_dataset.csv:/app/model/iris_dataset.csv" \
+          mlops-model
+
     - name: Test model
       run: docker run --rm -v "${{ github.workspace }}/model:/app/model" mlops-model python test.py > accuracy.txt
 
