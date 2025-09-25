@@ -41,6 +41,7 @@ jobs:
   
   save-and-report:
     runs-on: self-hosted
+    needs: train-and-test
     steps:
     
     - name: Save model
