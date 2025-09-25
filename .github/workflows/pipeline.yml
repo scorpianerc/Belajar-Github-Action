@@ -44,10 +44,10 @@ jobs:
       with:
         name: trained-model
         path: |
-          model.pkl
-          accuracy.txt
+          model/model.pkl
+          model/accuracy.txt
     
     - name: Show results
       run: |
         echo "Training dan testing selesai!"
-        echo "Accuracy: $(cat accuracy.txt)"
+        echo "Accuracy: $(cat model/accuracy.txt)"
