@@ -29,7 +29,7 @@ jobs:
         Write-Host "Model accuracy: $ACCURACY"
         
         python -c "
-        accuracy = float(open('accuracy.txt').read())
+        accuracy = float(open('model/accuracy.txt').read())
         if accuracy > 0.7:
             print('Model performance: BAIK (> 70%)')
         elif accuracy > 0.5:
