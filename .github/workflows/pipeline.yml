@@ -17,13 +17,12 @@ jobs:
     - name: Build Docker image
       run: docker build -f docker/Dockerfile.model -t mlops-model .
 
-
     - name: Train model
-      run: docker run --rm -v ${{ github.workspace }}:/app/model mlops-model
-    
+      run: docker run --rm -v "${{ github.workspace }}/model:/app/model" mlops-model
+      
     - name: Test model
-      run: docker run --rm -v ${{ github.workspace }}:/app/model mlops-model python test.py > accuracy.txt
-    
+      run: docker run --rm -v "${{ github.workspace }}/model:/app/model" mlops-model python test.py > accuracy.txt
+
     - name: Check accuracy
       run: |
         ACCURACY=$(cat accuracy.txt)
