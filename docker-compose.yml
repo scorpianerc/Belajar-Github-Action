@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  train:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.model
+    volumes:
+      - ./model:/app/model
+      - ./iris_dataset.csv:/app/model/iris_dataset.csv
+    command: python train.py
+
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.model
+    volumes:
+      - ./model:/app/model
+      - ./iris_dataset.csv:/app/model/iris_dataset.csv
+    command: python test.py
+    depends_on:
+      - train
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.model
+    volumes:
+      - ./model:/app/model
+    command: python api.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - train
