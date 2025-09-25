@@ -21,7 +21,7 @@ jobs:
       run: docker run --rm -v "${{ github.workspace }}/model:/app/model" -v "${{ github.workspace }}/iris_dataset.csv:/app/model/iris_dataset.csv" mlops-model
 
     - name: Test model
-      run: docker run --rm -v "C:\actions-runner\_work\Belajar-Github-Action\Belajar-Github-Action/model:/app/model" -v "C:\actions-runner\_work\Belajar-Github-Action\Belajar-Github-Action/iris_dataset.csv:/app/model/iris_dataset.csv" mlops-model python test.py > accuracy.txt
+      run: docker run --rm -v "${{ github.workspace }}/model:/app/model" -v "${{ github.workspace }}/iris_dataset.csv:/app/model/iris_dataset.csv" mlops-model python test.py
 
     - name: Check accuracy
       run: |
