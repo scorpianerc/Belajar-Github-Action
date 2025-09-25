@@ -39,11 +39,10 @@ jobs:
             exit(1)
         "
   
-  save-model:
+  save-and-report:
     runs-on: self-hosted
-    needs: train-and-test
     steps:
-
+    
     - name: Save model
       uses: actions/upload-artifact@v4
       with:
@@ -56,25 +55,3 @@ jobs:
       run: |
         echo "Training dan testing selesai!"
         echo "Accuracy: $(cat model/accuracy.txt)"
-  
-  deploy:
-    runs-on: self-hosted
-    needs: save-model
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Download model artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: trained-model
-    
-    - name: Build and Deploy API
-      run: |
-        docker compose build
-        docker compose up -d api
-    
-    - name: Test API
-      run: |
-        sleep 10  # Wait for the API to start
-        curl -X POST http://localhost:5000/predict -H "Content-Type: application/json" -d "{\"data\": [5.1, 3.5, 1.4, 0.2]}"
