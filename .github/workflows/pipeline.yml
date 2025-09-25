@@ -39,7 +39,7 @@ jobs:
             exit(1)
         "
   
-  Save Model:
+  save-model:
     runs-on: self-hosted
     needs: train-and-test
     steps:
