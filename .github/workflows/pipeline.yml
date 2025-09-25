@@ -25,7 +25,7 @@ jobs:
 
     - name: Check accuracy
       run: |
-        $ACCURACY = Get-Content accuracy.txt
+        $ACCURACY = Get-Content model/accuracy.txt
         Write-Host "Model accuracy: $ACCURACY"
         
         python -c "

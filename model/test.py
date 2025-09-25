@@ -46,6 +46,15 @@ def main():
         status = "BENAR" if test_labels.iloc[i] == predictions[i] else "SALAH"
         print(f"{i+1}. Actual: {actual}, Predicted: {predicted} [{status}]")
     
+    # Simpan log prediksi
+    with open('log.txt', 'w', encoding='utf-8') as flog:
+        flog.write("Hasil prediksi lengkap ...")
+    
+    # Simpan hanya nilai akurasi
+    accuracy = sum(test_labels == predictions) / len(test_labels)
+    with open('accuracy.txt', 'w') as facc:
+        facc.write(str(accuracy))
+    
     print("Testing selesai")
     return True
 
